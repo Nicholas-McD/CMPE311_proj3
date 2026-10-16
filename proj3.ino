@@ -84,6 +84,7 @@ void updateLEDs(unsigned long currentTime) {
       ledState1 = !ledState1;
       digitalWrite(LEDPin1, ledState1);
       
+      //testMyMilli();
       //printTime(currentTime, 1, ledState1);//test to make sure that the LEDs activate on the intervals that they are supposed to 
 
     }
@@ -104,6 +105,8 @@ void updateLEDs(unsigned long currentTime) {
       ledState2 = !ledState2;
       digitalWrite(LEDPin2, ledState2);
       //printTime(currentTime, 2, ledState2);//test to make sure that the LEDs activate on the intervals that they are supposed to
+      //testMyMilli();
+
 
     }
   } else {
@@ -226,9 +229,20 @@ void printTime(unsigned long time, int LED, bool state){
 */
 
 /*
-void testMyMilli(){
-    if(myMilli != millis()){
-        serial.println("Timers dotn match!");
+void testMyMilli()
+{
+    static unsigned long previousNewMilli = 0;
+    static unsigned long previousArduinoMilli = 0;
+
+    unsigned long currentNewMilli = newMilli();
+    unsigned long currentArduinoMilli = millis();
+
+    if ((currentNewMilli - previousNewMilli) !=
+        (currentArduinoMilli - previousArduinoMilli))
+    {
+        Serial.println("Timers don't match!");
     }
-}
-/*
+
+    previousNewMilli = currentNewMilli;
+    previousArduinoMilli = currentArduinoMilli;
+}*/
